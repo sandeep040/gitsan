@@ -1,0 +1,43 @@
+7) Verify an error message  Sorry, this user has been locked out is displayed when ;logged in with "locked_out_user" 
+package Testacase;
+
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.junit.Test;
+
+public class Lockedout {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "D:/chromedriver.exe");
+		WebDriver driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.saucedemo.com/");
+		driver.findElement(By.id("user-name")).sendKeys("locked_out_user");
+		driver.findElement(By.id("password")).sendKeys("secret_sauce");
+		driver.findElement(By.xpath("//*[@id=\"login_button_container\"]/div/form/input[3]")).click();
+	    Thread.sleep(2000);
+	    String actualerror = driver.findElement(By.id("login_button_container")).getText();
+	    System.out.print(actualerror);
+	    String expectederror = "Epic sadface: Sorry, this user has been locked out.";
+	 /*  //Type1
+	    Assert.assertEquals(actualerror,expectederror);
+	   //Type2
+	    Assert.assertTrue(actualerror.contains("asahtftye")); */
+	    if(actualerror.contains(expectederror)) {
+	    	System.out.println("Test passed");}
+	    else
+	    {
+	    	System.out.println("Test failed");
+	    }
+	    Thread.sleep(4000);
+	    System.out.println("test Completed");
+	    driver.close();
+	}
+
+}
+
+Output:"Epic sadface: Sorry, this user has been locked out."
+Test Passed
