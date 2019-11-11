@@ -1,0 +1,45 @@
+/* Verifying both performance anad problem_user credential validations */
+package Testacase;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Problemuser {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "D:/chromedriver.exe");
+		WebDriver driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.saucedemo.com/");
+		driver.findElement(By.id("user-name")).sendKeys("problem_user");
+		driver.findElement(By.id("password")).sendKeys("secret_sauce");
+		driver.findElement(By.xpath("//*[@id=\"login_button_container\"]/div/form/input[3]")).click();
+		String url1 = driver.getCurrentUrl();
+		System.out.println(url1);
+		if (url1.contains("https://www.saucedemo.com/inventory.html")){
+			System.out.println(" Redirecting to User Interface from Admin – Passed");
+			}
+			else{
+			System.out.println(" Redirecting to User Interface from Admin – Failed");
+			} 
+		Thread.sleep(4000);
+		driver.close();
+	}
+  driver.findElement(By.id("user-name")).sendKeys("performance_glitch_user");
+		driver.findElement(By.id("password")).sendKeys("secret_sauce");
+		driver.findElement(By.xpath("//*[@id=\"login_button_container\"]/div/form/input[3]")).click();
+		String url1 = driver.getCurrentUrl();
+		System.out.println(url1);
+		if (url1.contains("https://www.saucedemo.com/inventory.html")){
+			System.out.println(" Redirecting to User Interface from Admin – Passed");
+			}
+			else{
+			System.out.println(" Redirecting to User Interface from Admin – Failed");
+			} 
+		Thread.sleep(4000);
+		driver.close();
+
+}
+Output: " Redirecting to User Interface from Admin – Passed"
