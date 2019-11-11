@@ -1,0 +1,25 @@
+/* Check the image is dipalyed near Login Screen */
+package Testacase;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Testerror {
+public static WebDriver driver;
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "D:/chromedriver.exe");
+		driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.saucedemo.com/");
+		boolean Image= driver.findElement(By.xpath("/html/body/div[1]")).isDisplayed();
+		
+		Thread.sleep(4000);
+		driver.close();
+		
+	}
+	}
+  
+  Output: True
