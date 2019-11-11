@@ -1,0 +1,51 @@
+/* Read the Credentials from an external source and test the results */
+
+public static void main(String[] args) throws InterruptedException,IOException  {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "D:/chromedriver.exe");
+		WebDriver driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.saucedemo.com/");
+FileReader file= new FileReader("C:\\Users\\Sandeep\\Desktop\\selnj.txt");
+		BufferedReader br = new BufferedReader(file);
+
+		int Count=0;
+		int Iteration=0;
+		String line;
+
+		while ((line=br.readLine())!=null){
+		Count = Count+1;
+
+		if (Count > 1 ){
+		Iteration= Iteration+1;
+
+		String inputData[] = line.split(",",2);
+		driver= new ChromeDriver();
+		driver.manage().window().maximize();
+
+		driver.get("https://www.saucedemo.com/");
+
+		driver.findElement(By.id("user-name")).sendKeys(inputData[0]);
+		driver.findElement(By.id("Password")).sendKeys(inputData[1]);
+		driver.findElement(By.xpath("//*[@id=\"login_button_container\"]/div/form/input[3]")).click();
+		Thread.sleep(3000);
+
+		String url= driver.getCurrentUrl();
+
+		if (url.contains("https://www.saucedemo.com/inventory.html")){
+		System.out.println(Iteration + "Admin Login is Successful - Passed");
+		}
+		else {
+		System.out.println(Iteration + "Admin Login is UnSuccessful - Failed");
+		}
+		driver.close();
+		}
+		}
+		br.close();
+		file.close();
+		}
+	{
+		}
+		
+
+	}
